@@ -1,4 +1,23 @@
+import { useState } from "react";
 function IdeaCard(props) {
+  const [votes, setVotes] = useState(props.votes);
+  const [userVote, setUserVotes] = useState(null);
+  function handUpVote() {
+    if (userVote === "up") {
+      return;
+    } else {
+      setVotes(votes + 1);
+      setUserVotes("up");
+    }
+  }
+  function handDownVote() {
+    if (userVote === "down") {
+      return;
+    } else {
+      setVotes(votes - 1);
+      setUserVotes("down");
+    }
+  }
   return (
     <>
       <div className="bg-white rounded-xl hover:shadow-lg p-2 flex items-center justify-between gap-4">
@@ -13,11 +32,17 @@ function IdeaCard(props) {
           <span className="text-sm text-gray-400">{props.author}</span>
         </div>
         <div className="flex flex-col item-center gap-1">
-          <button className="text-gray-400 hover:text-green-500 text-lg">
+          <button
+            onClick={handUpVote}
+            className={`text-xl ${userVote === "up" ? "text-green-500" : "text-gray-400 hover:text-green-500"}`}
+          >
             ▲
           </button>
-          <span className="font-bold text-gray-800">{props.votes}</span>
-          <button className="text-gray-400 hover:text-red-500 text-lg">
+          <span className="font-bold text-gray-800">{votes}</span>
+          <button
+            onClick={handDownVote}
+            className={`text-xl ${userVote === "down" ? "text-red-500" : "text-gray-400 hover:text-green-500"} `}
+          >
             ▼
           </button>
         </div>

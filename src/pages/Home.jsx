@@ -1,5 +1,6 @@
 import Hero from "../components/Hero";
 import IdeaCard from "../components/IdeaCard";
+
 function Home() {
   const ideas = [
     {
@@ -24,6 +25,7 @@ function Home() {
       votes: 21,
     },
   ];
+
   return (
     <div>
       <Hero />
