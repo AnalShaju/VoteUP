@@ -24,6 +24,48 @@ function Home() {
       author: "Anonymous",
       votes: 21,
     },
+    {
+      id: 4,
+      title: "Mental health check-in app for students",
+      desc: "Daily mood tracker with anonymous peer support for college students.",
+      author: "Anonymous",
+      votes: 25,
+    },
+    {
+      id: 5,
+      title: "Mental health check-in app for students",
+      desc: "Daily mood tracker with anonymous peer support for college students.",
+      author: "Anonymous",
+      votes: 28,
+    },
+    {
+      id: 6,
+      title: "Mental health check-in app for students",
+      desc: "Daily mood tracker with anonymous peer support for college students.",
+      author: "Anonymous",
+      votes: 60,
+    },
+    {
+      id: 7,
+      title: "Mental health check-in app for students",
+      desc: "Daily mood tracker with anonymous peer support for college students.",
+      author: "Anonymous",
+      votes: 2,
+    },
+    {
+      id: 8,
+      title: "Mental health check-in app for students",
+      desc: "Daily mood tracker with anonymous peer support for college students.",
+      author: "Anonymous",
+      votes: 10,
+    },
+    {
+      id: 9,
+      title: "Mental health check-in app for students",
+      desc: "Daily mood tracker with anonymous peer support for college students.",
+      author: "Anonymous",
+      votes: 11,
+    },
   ];
 
   return (
