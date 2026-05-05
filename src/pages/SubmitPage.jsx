@@ -14,7 +14,7 @@ function SubmitPage() {
   };
 
   return (
-    <div className="min-h-screen  px-6 py-10 flex flex-col items-center">
+    <div className="min-h-screen px-6 py-10 flex flex-col items-center">
       <div className="w-full max-w-xl">
         <h1 className="text-3xl font-bold text-gray-900 mb-1">
           Submit your idea
@@ -32,10 +32,6 @@ function SubmitPage() {
               {...register("title", {
                 required: "Title is required",
                 maxLength: { value: 100, message: "Max 100 characters" },
-                onChange: (e) => {
-                  document.getElementById("title-count").textContent =
-                    e.target.value.length + " / 100";
-                },
               })}
               maxLength={100}
               placeholder="A concise, punchy title..."
@@ -43,14 +39,11 @@ function SubmitPage() {
                 errors.title ? "border-red-400" : "border-gray-200"
               }`}
             />
-            <div className="flex justify-between">
+            {errors.title && (
               <span className="text-red-500 text-xs">
-                {errors.title?.message}
+                {errors.title.message}
               </span>
-              <span id="title-count" className="text-xs text-gray-400">
-                0 / 100
-              </span>
-            </div>
+            )}
           </div>
 
           <div className="flex flex-col gap-1">
@@ -61,10 +54,6 @@ function SubmitPage() {
               {...register("desc", {
                 required: "Description is required",
                 maxLength: { value: 300, message: "Max 300 characters" },
-                onChange: (e) => {
-                  document.getElementById("desc-count").textContent =
-                    e.target.value.length + " / 300";
-                },
               })}
               maxLength={300}
               placeholder="Describe the problem you're solving, your target customer, and why now..."
@@ -73,14 +62,11 @@ function SubmitPage() {
                 errors.desc ? "border-red-400" : "border-gray-200"
               }`}
             />
-            <div className="flex justify-between">
+            {errors.desc && (
               <span className="text-red-500 text-xs">
-                {errors.desc?.message}
+                {errors.desc.message}
               </span>
-              <span id="desc-count" className="text-xs text-gray-400">
-                0 / 300
-              </span>
-            </div>
+            )}
           </div>
 
           <div className="flex flex-col gap-1">
