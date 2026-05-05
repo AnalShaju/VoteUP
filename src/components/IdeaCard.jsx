@@ -41,7 +41,7 @@ function IdeaCard(props) {
           <span className="font-bold text-gray-800">{votes}</span>
           <button
             onClick={handDownVote}
-            className={`text-xl ${userVote === "down" ? "text-red-500" : "text-gray-400 hover:text-green-500"} `}
+            className={`text-xl ${userVote === "down" ? "text-red-500" : "text-gray-400 hover:text-red-500"} `}
           >
             ▼
           </button>
