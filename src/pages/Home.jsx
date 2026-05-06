@@ -1,72 +1,24 @@
 import Hero from "../components/Hero";
 import IdeaCard from "../components/IdeaCard";
+import { useState, useEffect } from "react";
+import { supabase } from "../lib/supabaseClient";
 
 function Home() {
-  const ideas = [
-    {
-      id: 1,
-      title: "AI-powered personal finance coach",
-      desc: "An app that analyzes your spending habits and gives brutally honest, personalized advice.",
-      author: "Priya K.",
-      votes: 37,
-    },
-    {
-      id: 2,
-      title: "Hyperlocal grocery delivery under 10 mins",
-      desc: "Partner with local kirana stores for instant delivery in tier-2 cities.",
-      author: "Arjun K.",
-      votes: 28,
-    },
-    {
-      id: 3,
-      title: "Mental health check-in app for students",
-      desc: "Daily mood tracker with anonymous peer support for college students.",
-      author: "Anonymous",
-      votes: 21,
-    },
-    {
-      id: 4,
-      title: "Mental health check-in app for students",
-      desc: "Daily mood tracker with anonymous peer support for college students.",
-      author: "Anonymous",
-      votes: 25,
-    },
-    {
-      id: 5,
-      title: "Mental health check-in app for students",
-      desc: "Daily mood tracker with anonymous peer support for college students.",
-      author: "Anonymous",
-      votes: 28,
-    },
-    {
-      id: 6,
-      title: "Mental health check-in app for students",
-      desc: "Daily mood tracker with anonymous peer support for college students.",
-      author: "Anonymous",
-      votes: 60,
-    },
-    {
-      id: 7,
-      title: "Mental health check-in app for students",
-      desc: "Daily mood tracker with anonymous peer support for college students.",
-      author: "Anonymous",
-      votes: 2,
-    },
-    {
-      id: 8,
-      title: "Mental health check-in app for students",
-      desc: "Daily mood tracker with anonymous peer support for college students.",
-      author: "Anonymous",
-      votes: 10,
-    },
-    {
-      id: 9,
-      title: "Mental health check-in app for students",
-      desc: "Daily mood tracker with anonymous peer support for college students.",
-      author: "Anonymous",
-      votes: 11,
-    },
-  ];
+  const [ideas, setIdeas] = useState([]);
+  const fetchIdeas = async () => {
+    const { data, error } = await supabase
+      .from("ideas")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) {
+      console.error("Error fetcching ideas:", error);
+      return;
+    }
+    setIdeas(data);
+  };
+  useEffect(() => {
+    fetchIdeas();
+  }, []);
 
   return (
     <div>
@@ -83,9 +35,10 @@ function Home() {
           {ideas.map((idea, index) => (
             <IdeaCard
               key={idea.id}
+              id={idea.id}
               number={index + 1}
               title={idea.title}
-              desc={idea.desc}
+              desc={idea.description}
               author={idea.author}
               votes={idea.votes}
             />

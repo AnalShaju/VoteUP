@@ -1,6 +1,10 @@
+import { useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 import { useForm } from "react-hook-form";
 
 function SubmitPage() {
+  const [submitted, setSubmitted] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -8,9 +12,21 @@ function SubmitPage() {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const { error } = await supabase.from("ideas").insert({
+      title: data.title,
+      description: data.desc,
+      author: data.author || "Anonymous",
+    });
+
+    if (error) {
+      console.error("Error submitting idea:", error);
+      return;
+    }
+
     reset();
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
   };
 
   return (
@@ -22,6 +38,12 @@ function SubmitPage() {
         <p className="text-gray-500 mb-6">
           Share a startup idea with the community
         </p>
+
+        {submitted && (
+          <div className="bg-green-50 border border-green-200 text-green-700 rounded-lg px-4 py-3 mb-4 text-sm">
+            ✅ Your idea has been submitted successfully!
+          </div>
+        )}
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col gap-5">
           <div className="flex flex-col gap-1">
